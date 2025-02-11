@@ -423,16 +423,17 @@ Immutable cluster configurations
 └──────────────────────────────────────────────────────────────┘
 
 ```
-* Explanation for the Diagram:
-** Incoming Requests:
+
+Explanation for the Diagram:
+* Incoming Requests:
 	Requests from users or services enter the application.
-** Rate Limiter:
+* Rate Limiter:
 	Controls the number of requests processed concurrently to avoid overwhelming the database or application.
-** Worker Pool:
+* Worker Pool:
 	A fixed number of goroutines process tasks (e.g., database queries) to respect connection limits.
-** Caching Layer:
+* Caching Layer:
 	Frequently accessed data is stored in a cache (e.g., Redis or in-memory) to reduce database queries.
-** Database Connection Pool:
+* Database Connection Pool:
 	Limits the number of active database connections (e.g., using database/sql connection pooling in Go).
-** Database:
+* Database:
 	The shared database infrastructure with fixed connection limits and immutable configurations.
