@@ -54,8 +54,6 @@ func main() {
 ```
 
 # 2. Question: Describe the process of creating, managing, and gracefully shutting down asynchronous workflows within a Go application.
-Provide an example demonstrating a publisher/subscriber architecture implemented using these methods without relying on external
-infrastructure. Additionally, explain the significance of properly shutting down these workflows.
 
 * asynchronous workflows are typically managed using goroutines, channels, and context for coordination and graceful shutdown. Here's how to create, manage, and shut them down:
 * Creating Workflows（Use goroutines to perform tasks concurrently）  ---》 Managing Workflows （publisher/subscriber pattern） ---》Graceful Shutdown（Use context.WithCancel or context.WithTimeout to signal goroutines to stop and ensure resources are cleaned up）
@@ -197,7 +195,6 @@ func main() {
 
 
 # 4. Question: How would you apply the principles of Clean Architecture when organizing code within a Go application? Provide an example
-directory structure and discuss the Go concepts typically employed to effectively implement this architecture.
 
 * Entities: Core business logic, independent of external systems.
 * Use Cases: Application-specific business rules, orchestrating interactions between entities and external systems.
@@ -225,8 +222,7 @@ project/
 ```
 
 
-# 5. Question: When tasked with optimizing the performance of a Go application, what are the initial areas you focus on? How do you approach
-identifying specific areas for improvement? Please share any relevant experiences you have with optimization in Go.
+# 5. Question: When tasked with optimizing the performance of a Go application, what are the initial areas you focus on? How do you approach identifying specific areas for improvement? Please share any relevant experiences you have with optimization in Go.
 
 As an SRE, the focus is on ensuring reliability, scalability, and performance. Optimization involves identifying bottlenecks, improving resource utilization, and maintaining system stability.
 
@@ -261,10 +257,7 @@ Kubernetes APC (Auto-scaling, Profiling, Caching)
 
 
 
-# 6. Generic Processing of Structures
-Question: In Go, what is your preferred development pattern for abstracting the instantiation and processing of multiple data structures in a
-generic manner? Explain your reasoning and provide an example demonstrating the use of this pattern to instantiate different structure
-types while maintaining a consistent processing approach.
+# 6. Question: In Go, what is your preferred development pattern for abstracting the instantiation and processing of multiple data structures in a generic manner? Explain your reasoning and provide an example demonstrating the use of this pattern to instantiate different structure types while maintaining a consistent processing approach.
 
 * In Go, Generics is the preferred pattern for abstracting the instantiation and processing of multiple data structures in a generic and type-safe manner. It avoids code duplication and ensures consistency.
 * Type Safety: Avoids issues with type assertions when using interface{}.
@@ -306,10 +299,7 @@ func main() {
 
 * Use Generics in Go enable type-safe, reusable, and consistent processing of multiple data structures, making it an ideal choice for abstraction.
 
-# 7. Question: Consider a high-traffic, low-latency product that has transitioned from a legacy monolithic architecture to a microservice-based
-architecture. Each service adheres to the Single Responsibility Principle (SRP) for data management, requiring inter-service communication
-to complete tasks. What additional architectural patterns or best practices could be implemented to minimize inter-service communication
-and enhance overall system throughput and latency?
+# 7. Question: Consider a high-traffic, low-latency product that has transitioned from a legacy monolithic architecture to a microservice-based architecture. Each service adheres to the Single Responsibility Principle (SRP) for data management, requiring inter-service communication to complete tasks. What additional architectural patterns or best practices could be implemented to minimize inter-service communication and enhance overall system throughput and latency?
 
 * Architecture Diagram
   
@@ -364,12 +354,7 @@ project/
 ```
 
 
-# 8. Question: What strategies can be employed to optimize application-level concurrency when working with database constraints, particularly
-in scenarios with:
-Shared database infrastructure
-Fixed connection limits
-Immutable cluster configurations
-
+# 8. Question: What strategies can be employed to optimize application-level concurrency when working with database constraints, particularly in scenarios with: Shared database infrastructure Fixed connection limits Immutable cluster configurations
 
 * Connection Pooling: Limit the number of active database connections to avoid overwhelming the database.
 * Rate Limiting: Control the number of concurrent requests to the database.
