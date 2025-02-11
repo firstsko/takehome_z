@@ -259,7 +259,8 @@ Kubernetes APC (Auto-scaling, Profiling, Caching)
 
 # 6. Question: In Go, what is your preferred development pattern for abstracting the instantiation and processing of multiple data structures in a generic manner? Explain your reasoning and provide an example demonstrating the use of this pattern to instantiate different structure types while maintaining a consistent processing approach.
 
-* In Go, Generics is the preferred pattern for abstracting the instantiation and processing of multiple data structures in a generic and type-safe manner. It avoids code duplication and ensures consistency.
+In Go, Generics is the preferred pattern for abstracting the instantiation and processing of multiple data structures in a generic and type-safe manner. It avoids code duplication and ensures consistency.
+
 * Type Safety: Avoids issues with type assertions when using interface{}.
 * Code Reusability: Reduces repetitive code for different data structures.
 * Consistency: Provides a unified way to process various types.
