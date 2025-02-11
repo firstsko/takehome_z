@@ -233,46 +233,27 @@ identifying specific areas for improvement? Please share any relevant experience
 As an SRE, the focus is on ensuring reliability, scalability, and performance. Optimization involves identifying bottlenecks, improving resource utilization, and maintaining system stability.
 
 Key Areas to Focus On:
-Profiling and Monitoring:
+| **Key Area**            | **Focus**                                                                 | **Tools/Methods**                                                                                     |
+|--------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Profiling and Monitoring** | - Profile CPU, memory, and goroutine usage. <br> - Monitor metrics like latency, throughput, and error rates. | - Tools: `pprof`, `trace`, `expvar` <br> - Monitoring: Prometheus, Grafana                                                                |
+| **Concurrency and Goroutines** | - Detect excessive goroutine creation or leaks. <br> - Optimize goroutine usage.                          | - Use worker pools or rate limiting.                                                                 |
+| **Memory Management**    | - Identify memory leaks or high GC overhead. <br> - Reduce unnecessary memory usage.                          | - Tools: `pprof` for heap analysis.                                                                  |
+| **I/O and Network**       | - Optimize database queries and reduce round trips. <br> - Use efficient communication libraries.             | - Use connection pooling. <br> - Libraries: `fasthttp`, gRPC.                                        |
+| **Code Efficiency**       | - Avoid unnecessary allocations and copies. <br> - Use efficient data structures and algorithms.              | - Optimize slices vs. maps.                                                                          |
+| **Caching**               | - Reduce expensive computations or I/O with caching.                                                        | - In-memory caching: `sync.Map`. <br> - External caching: Redis.                                     |
+| **Scalability**           | - Ensure horizontal scalability. <br> - Handle traffic spikes effectively.                                   | - Use load balancing and stateless design. <br> - Implement rate limiting and circuit breakers.       |
 
-Use tools like pprof, trace, and expvar to profile CPU, memory, and goroutine usage.
-Monitor metrics (latency, throughput, error rates) using Prometheus, Grafana, or similar tools.
-Concurrency and Goroutines:
 
-Check for excessive goroutine creation or leaks.
-Optimize goroutine usage with worker pools or rate limiting.
-Memory Management:
 
-Identify memory leaks or high GC (garbage collection) overhead.
-Use pprof to analyze heap allocations and reduce unnecessary memory usage.
-I/O and Network:
+Approach to Identifying Bottlenecks
 
-Optimize database queries, reduce round trips, and use connection pooling.
-Use efficient libraries for HTTP or gRPC communication (e.g., fasthttp).
-Code Efficiency:
+| **Step**               | **Description**                                                                 | **Tools/Methods**                                                                                     |
+|-------------------------|---------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Baseline Metrics**    | - Establish baseline performance metrics (e.g., latency, CPU, memory usage). <br> - Identify slow paths.          | - Tools: Distributed tracing (e.g., OpenTelemetry).                                                  |
+| **Reproduce Issues**    | - Simulate production-like traffic to identify performance degradation.                                             | - Load testing tools: `k6`, `wrk`, `locust`.                                                         |
+| **Iterative Optimization** | - Focus on the most impactful bottlenecks first. <br> - Continuously test and measure improvements.             | - Profile and monitor after each optimization step.                                                  |
 
-Avoid unnecessary allocations and copies.
-Use efficient data structures (e.g., slices vs. maps) and algorithms.
-Caching:
 
-Implement caching (e.g., in-memory with sync.Map or external like Redis) to reduce expensive computations or I/O.
-Scalability:
-
-Ensure the application scales horizontally by optimizing load balancing and statelessness.
-Use rate limiting and circuit breakers to handle traffic spikes.
-Approach to Identifying Bottlenecks:
-Baseline Metrics:
-
-Establish baseline performance metrics (e.g., latency, CPU, memory usage).
-Use distributed tracing (e.g., OpenTelemetry) to identify slow paths.
-Reproduce Issues:
-
-Use load testing tools to simulate production-like traffic.
-Identify performance degradation under load.
-Iterative Optimization:
-
-Focus on the most impactful bottlenecks first
-Continuously test and measure improvements.
 
 
 # 6. Generic Processing of Structures
