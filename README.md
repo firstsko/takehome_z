@@ -326,6 +326,58 @@ architecture. Each service adheres to the Single Responsibility Principle (SRP) 
 to complete tasks. What additional architectural patterns or best practices could be implemented to minimize inter-service communication
 and enhance overall system throughput and latency?
 
+* Architecture Diagram
+  
+```markdown
+┌──────────────────────────────┐
+│        **Frameworks**        │
+│ (e.g., HTTP, DB, gRPC, etc.) │
+│ ─ External dependencies ─    │
+└──────────────▲───────────────┘
+               │
+┌──────────────┴───────────────┐
+│     **Interface Adapters**   │
+│ (e.g., HTTP Handlers, Repos) │
+│ ─ Converts data formats ─    │
+└──────────────▲───────────────┘
+               │
+┌──────────────┴───────────────┐
+│         **Use Cases**         │
+│ ─ Application business logic  │
+│ ─ Orchestrates entities       │
+└──────────────▲───────────────┘
+               │
+┌──────────────┴───────────────┐
+│         **Entities**          │
+│ ─ Core business rules         │
+│ ─ Independent of everything   │
+└───────────────────────────────┘
+
+```
+
+ * Directory Structure
+ 
+```markdown
+project/
+├── cmd/                # Application entry points
+│   └── main.go
+├── internal/
+│   ├── entity/         # Core business entities (domain models)
+│   │   └── user.go
+│   ├── usecase/        # Application-specific business logic
+│   │   └── user_usecase.go
+│   ├── adapter/        # Interface adapters
+│   │   ├── http/       # HTTP handlers
+│   │   │   └── user_handler.go
+│   │   └── repository/ # Database repositories
+│   │       └── user_repo.go
+│   └── infrastructure/ # Frameworks and drivers
+│       └── db.go
+└── pkg/                # Shared libraries/utilities (optional)
+
+
+```
+
 
 # 8. Improve Concurrency
 Question: What strategies can be employed to optimize application-level concurrency when working with database constraints, particularly
