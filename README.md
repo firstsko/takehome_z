@@ -200,6 +200,31 @@ func main() {
 Question: How would you apply the principles of Clean Architecture when organizing code within a Go application? Provide an example
 directory structure and discuss the Go concepts typically employed to effectively implement this architecture.
 
+* Entities: Core business logic, independent of external systems.
+* Use Cases: Application-specific business rules, orchestrating interactions between entities and external systems.
+* Interface Adapters: Handle input/output, converting data between external systems (e.g., HTTP, DB) and use cases.
+* Frameworks/Drivers: External systems like web frameworks, databases, or APIs.
+
+```markdown
+project/
+├── cmd/                # Application entry points (main package)
+│   └── main.go
+├── internal/
+│   ├── entity/         # Core business entities (domain models)
+│   │   └── user.go
+│   ├── usecase/        # Application-specific business logic
+│   │   └── user_usecase.go
+│   ├── adapter/        # Interface adapters (e.g., HTTP handlers, DB repositories)
+│   │   ├── http/       # HTTP handlers
+│   │   │   └── user_handler.go
+│   │   └── repository/ # Database repositories
+│   │       └── user_repo.go
+│   └── infrastructure/ # Frameworks and drivers (e.g., DB, external APIs)
+│       └── db.go
+└── pkg/                # Shared libraries/utilities (optional)
+
+```
+
 
 # 5. Application Performance Optimization
 Question: When tasked with optimizing the performance of a Go application, what are the initial areas you focus on? How do you approach
