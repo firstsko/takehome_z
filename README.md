@@ -57,9 +57,56 @@ infrastructure. Additionally, explain the significance of properly shutting down
 * asynchronous workflows are typically managed using goroutines, channels, and context for coordination and graceful shutdown. Here's how to create, manage, and shut them down:
 * Creating Workflows（Use goroutines to perform tasks concurrently）  ---》 Managing Workflows （publisher/subscriber pattern） ---》Graceful Shutdown（Use context.WithCancel or context.WithTimeout to signal goroutines to stop and ensure resources are cleaned up）
 
+* Publisher/Subscriber Architecture
+```
+package main
 
-: Use channels for communication between goroutines (e.g., publisher/subscriber pattern).
-Graceful Shutdown: Use context.WithCancel or context.WithTimeout to signal goroutines to stop and ensure resources are cleaned up.
+import (
+	"context"
+	"fmt"
+	"time"
+)
+
+// Publisher function
+func publisher(ctx context.Context, ch chan<- string) {
+	defer close(ch)
+	for i := 0; i < 5; i++ {
+		select {
+		case <-ctx.Done():
+			fmt.Println("Publisher shutting down")
+			return
+		case ch <- fmt.Sprintf("Message %d", i):
+			time.Sleep(1000 * time.Millisecond)
+		}
+	}
+}
+
+// Subscriber function
+func subscriber(ctx context.Context, ch <-chan string) {
+	for {
+		select {
+		case <-ctx.Done():
+			fmt.Println("Subscriber shutting down")
+			return
+		case msg, ok := <-ch:
+			if !ok {
+				return
+			}
+			fmt.Println("Received:", msg)
+		}
+	}
+}
+
+func main() {
+	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+	defer cancel()
+
+	ch := make(chan string)
+	go publisher(ctx, ch)
+	subscriber(ctx, ch)
+}
+
+```
 
 
 # 3. Error Handling in Web Services
