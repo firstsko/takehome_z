@@ -113,6 +113,85 @@ func main() {
 Question: Imagine a Go service responsible for handling data storage and retrieval operations for a frontend page. Explain how error
 handling should be implemented within this service, particularly focusing on how errors should be propagated back to the frontend.
 
+* Input Validation: Validate request data and return 4XX Bad Request for invalid inputs.
+* Service Layer Errors: Use structured errors to propagate meaningful error messages.
+* HTTP Response: Map errors to appropriate HTTP status codes and return JSON responses.
+* Logging: Log detailed errors on the server side for debugging.
+
+  Gin Framework Sample:
+  ```
+  package main
+
+import (
+	"errors"
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+// Custom error type
+type AppError struct {
+	Code    int    `json:"code"`
+	Message string `json:"message"`
+}
+
+func (e *AppError) Error() string {
+	return e.Message
+}
+
+// Simulated service function
+func fetchData(id string) (map[string]string, error) {
+	if id == "" {
+		return nil, &AppError{Code: http.StatusBadRequest, Message: "Missing ID"}
+	}
+	if id != "123" {
+		return nil, &AppError{Code: http.StatusNotFound, Message: "Data not found"}
+	}
+	return map[string]string{"id": id, "value": "example"}, nil
+}
+
+// Handler function
+func getData(c *gin.Context) {
+	id := c.Query("id")
+
+	// Call service function
+	data, err := fetchData(id)
+	if err != nil {
+		handleError(c, err)
+		return
+	}
+
+	// Return success response
+	c.JSON(http.StatusOK, gin.H{"data": data})
+}
+
+// Error handler
+func handleError(c *gin.Context, err error) {
+	var appErr *AppError
+	if errors.As(err, &appErr) {
+		// Return structured error response
+		c.JSON(appErr.Code, gin.H{"error": appErr.Message})
+	} else {
+		// Internal server error
+		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		// Log the detailed error for debugging
+		c.Error(err)
+	}
+}
+
+func main() {
+	r := gin.Default()
+
+	// Define route
+	r.GET("/data", getData)
+
+	// Start server
+	r.Run(":8080")
+}
+
+  ```
+
+
 
 # 4. Clean Architecture
 Question: How would you apply the principles of Clean Architecture when organizing code within a Go application? Provide an example
