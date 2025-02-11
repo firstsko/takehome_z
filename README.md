@@ -1,5 +1,5 @@
-## Author: Hui Tu
-## Email: anakintuhui@gmail.com
+#### Author: Hui Tu
+#### Email: anakintuhui@gmail.com
 
 # 1. Question: Can you elaborate on the distinctions between Composition and Inheritance within the
 
