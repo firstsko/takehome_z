@@ -3,7 +3,7 @@ Question: Can you elaborate on the distinctions between Composition and Inherita
 
 * Composition and Inheritance are two approaches to code reuse, but Go does not support traditional inheritance. Instead, it emphasizes composition for implementing object-oriented programming.
 
-** Traditional Inheritance (Not in Go):
+* Traditional Inheritance (Not in Go):
 ```
 class Animal {
     void Speak() {
@@ -19,7 +19,7 @@ class Dog extends Animal {
 
 ```
 
-** Go Composition:
+* Go Composition:
 ```
 package main
 
