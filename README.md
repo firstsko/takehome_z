@@ -4,7 +4,8 @@ Question: Can you elaborate on the distinctions between Composition and Inherita
 * Composition and Inheritance are two approaches to code reuse, but Go does not support traditional inheritance. Instead, it emphasizes composition for implementing object-oriented programming.
 
 * Traditional Inheritance (Not in Go):
-```
+  
+```go
 class Animal {
     void Speak() {
         System.out.println("Animal speaks");
@@ -20,7 +21,8 @@ class Dog extends Animal {
 ```
 
 * Go Composition:
-```
+  
+```go
 package main
 
 import "fmt"
@@ -58,7 +60,8 @@ infrastructure. Additionally, explain the significance of properly shutting down
 * Creating Workflows（Use goroutines to perform tasks concurrently）  ---》 Managing Workflows （publisher/subscriber pattern） ---》Graceful Shutdown（Use context.WithCancel or context.WithTimeout to signal goroutines to stop and ensure resources are cleaned up）
 
 * Publisher/Subscriber Architecture
-```
+  
+```go
 package main
 
 import (
@@ -119,7 +122,8 @@ handling should be implemented within this service, particularly focusing on how
 * Logging: Log detailed errors on the server side for debugging.
 
   Gin Framework Sample:
-  ```
+  
+  ```go
   package main
 
 import (
