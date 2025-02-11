@@ -254,6 +254,13 @@ Approach to Identifying Bottlenecks
 | **Iterative Optimization** | - Focus on the most impactful bottlenecks first. <br> - Continuously test and measure improvements.             | - Profile and monitor after each optimization step.                                                  |
 
 
+Kubernetes APC (Auto-scaling, Profiling, Caching)
+| **K8s Strategy**        | **Focus**                                                                 | **Tools/Methods**                                                                                     |
+|--------------------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| **Auto-scaling**         | - Scale pods horizontally to handle traffic spikes. <br> - Ensure resource limits and requests are set properly. | - Use Horizontal Pod Autoscaler (HPA) for CPU/memory-based scaling. <br> - Use Vertical Pod Autoscaler (VPA) for resource optimization. |
+| **Profiling**            | - Monitor application performance in real-time. <br> - Identify resource bottlenecks in pods.                   | - Tools: Prometheus, Grafana, Kubernetes Metrics Server. <br> - Use `kubectl top` to monitor pod resource usage. |
+| **Caching**              | - Reduce database load and improve response times. <br> - Cache frequently accessed data.                      | - Use in-cluster caching solutions like Redis or Memcached. <br> - Use sidecar caching patterns (e.g., Envoy). |
+
 
 
 # 6. Generic Processing of Structures
