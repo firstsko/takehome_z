@@ -55,7 +55,7 @@ func main() {
 
 # 2. Question: Describe the process of creating, managing, and gracefully shutting down asynchronous workflows within a Go application.
 
-* asynchronous workflows are typically managed using goroutines, channels, and context for coordination and graceful shutdown. Here's how to create, manage, and shut them down:
+asynchronous workflows are typically managed using goroutines, channels, and context for coordination and graceful shutdown. Here's how to create, manage, and shut them down:
 * Creating Workflows（Use goroutines to perform tasks concurrently）  ---》 Managing Workflows （publisher/subscriber pattern） ---》Graceful Shutdown（Use context.WithCancel or context.WithTimeout to signal goroutines to stop and ensure resources are cleaned up）
 
 * Publisher/Subscriber Architecture
