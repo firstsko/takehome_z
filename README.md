@@ -121,10 +121,11 @@ handling should be implemented within this service, particularly focusing on how
 * HTTP Response: Map errors to appropriate HTTP status codes and return JSON responses.
 * Logging: Log detailed errors on the server side for debugging.
 
+
   Gin Framework Sample:
-  
-  ```go
-  package main
+```markdown
+```go
+package main
 
 import (
 	"errors"
@@ -133,7 +134,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-
+// Custom error type
 type AppError struct {
 	Code    int    `json:"code"`
 	Message string `json:"message"`
@@ -143,7 +144,7 @@ func (e *AppError) Error() string {
 	return e.Message
 }
 
-
+// Simulated service function
 func fetchData(id string) (map[string]string, error) {
 	if id == "" {
 		return nil, &AppError{Code: http.StatusBadRequest, Message: "Missing ID"}
@@ -154,6 +155,7 @@ func fetchData(id string) (map[string]string, error) {
 	return map[string]string{"id": id, "value": "example"}, nil
 }
 
+// Handler function
 func getData(c *gin.Context) {
 	id := c.Query("id")
 
@@ -164,17 +166,20 @@ func getData(c *gin.Context) {
 		return
 	}
 
-
+	// Return success response
 	c.JSON(http.StatusOK, gin.H{"data": data})
 }
 
-
+// Error handler
 func handleError(c *gin.Context, err error) {
 	var appErr *AppError
 	if errors.As(err, &appErr) {
+		// Return structured error response
 		c.JSON(appErr.Code, gin.H{"error": appErr.Message})
 	} else {
+		// Internal server error
 		c.JSON(http.StatusInternalServerError, gin.H{"error": "Internal Server Error"})
+		// Log the detailed error for debugging
 		c.Error(err)
 	}
 }
@@ -182,12 +187,12 @@ func handleError(c *gin.Context, err error) {
 func main() {
 	r := gin.Default()
 
+	// Define route
 	r.GET("/data", getData)
 
+	// Start server
 	r.Run(":8080")
 }
-
-  ```
 
 
 
